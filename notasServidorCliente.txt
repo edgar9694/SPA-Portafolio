@@ -1,0 +1,202 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                                      NOTAS DE FRONTEND
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+debido a la version de npm que tengo debo instalar las dependencias del desarrollador luego de instalar el proyecto de angular, el comando es
+
+npm install --only=dev
+
+el backend del proyecto es la carpeta aprendiendo-nodejs
+
+ahora creamos una carpeta de servicios y una de modelos
+
+SIEMPRE QUE SE IMPORTEN SERVICIOS DEBEN DE IMPORTARSE LOS MOODULOS EN APP.MODULE.TS PARA QUE SE PUEDAN USAR Y LUEGO DECLARARLOS EN SU RESPECTIVO CAMPO (DECLARATIONS, IMPORTS, PROVIDERS, ETC)
+
+siempre que instales algun plugin por npm tienes que volver a montar el servidor
+
+
+cuando se quiere pasar de padre a hijo se usa el componente Input, cuando se quiere pasar de hijo a padre se usa Output
+
+
+VIEWCHILD EN ANGULAR 8
+
+Lo primero es importar los componentes necesarios (ahora se necesitan 2 más aparte del Viewchild ).
+
+1.- Viewchild: Decorador de propiedades que configura una consulta de vista.
+
+2.- AfterViewInit: Un método de devolución de llamada que se invoca inmediatamente después de que Angular haya completado la inicialización de la vista de un componente.
+
+3.- ElementRef: Permitir el acceso directo al DOM puede hacer que su aplicación sea más vulnerable a los ataques XSS.
+
+Todo esto es lo que necesitamos para completar está clase del curso, puedes investigar más para implementar todo de manera más segura si lo que quieres es manipular el DOM de esta forma. El import quedaría así:
+
+import { Component, OnInit, ViewChild, AfterViewInit, ElementRef} from '@angular/core';
+
+
+El HTML del componente quedaría algo así.
+
+<div  id="texto">
+  <p>
+    Esta es la pagina de contact, puedes Enviarnos cualquier duda
+  </p>
+</div>
+
+
+Ahora declaramos el AfterViewInit en nuestra clase:
+
+
+export class ContactComponent implements OnInit, AfterViewInit
+
+
+Ahora esta es la nueva forma de usar el decorador @Viewchild("aquí va el nombre que le dimos a la almoadilla", {esto va por defecto. Para más detalles visita el siguiente enlace aqui} "aquí ira el nombre de una variable que guardará el contenido de nuestro <p>": "convertimos nuestra variable a un elemento ElementRef para poder acceder al DOM"):
+
+
+@ViewChild('textos', {static: false}) Textos: ElementRef;
+
+
+
+Ahora lo que queda es crear un metodo llamado ngAfterViewInit() este metodo se ejecuta antes que el OnInit ya que lo datos que estamos opteniendo son parte del DOM el DOM es lo primero que se inicializa, así que si queremos llamar nuestra variable Parrafo en el OnInit no funcionará. Ahora simplemente mostramos por consola la información que tenemos en nuestra etiqueta parrafo.
+
+
+ngAfterViewInit(){
+  console.log(this.Textos.nativeElement.textContent);
+}
+
+
+
+
+Crear una directiva
+
+ng g directive nombre_de_la_directiva
+
+y para aplicarlo es colocar en la etiqueta nombre_de_la_directiva
+
+
+
+con la directiva puedo recibir la informacion de la etiqueta que lo contiene y cambiarle sus estilos desde nombre_de_la_directiva.directive.ts
+
+
+
+para siempre instalar la ultima version de angular sin fallos hacer esto:
+
+  1 Actualizar NodeJs
+  2 desinstalar la version actual de angular: npm uninstall -g @angular/cli
+  3 ejecutar: npm cache verify
+  4 ejecutar: npm cache clean --force
+  5 ejecutar: npm install -g @angular/cli@latest
+  6 para crear el proyecto: ng new nombre_del_proyecto
+
+
+
+Solucionar Error en vulnerabilidades de NPM y NodeJS
+
+  1 Ejecutar: npm install -g npm@latest
+  2 ejecutar: npm cache clean --force
+  3 ejecutar: npm set audit false (esto se hace para evitar que salgan warnings en la instalacion de algun paquete)
+
+
+Migrar un Proyecto de angular a la ultima version
+
+  1 ejecutar en la carpeta del proyecto: npm install @angular/cli@latest
+  2 ejecutar: ng update @angular/cli
+  3 ejecutar: ng update (muestra una lista con los paquetes que faltan Actualizar)
+  4 ejecutar ng update --all
+  5 Si se muestran incompatibilidades, se necesita cambiar los valores de las versiones por las que muestra el comando de respuesta luego ejecutar: npm update
+  6 ejecutar: ng update (para verificar si falta algo por Actualizar )
+  7 ejecutar ng update --all --force
+  8 si hay error con alguna deoendencia se hace
+    8.1 ejecutar: npm uninstall --save nombre_dependencia
+    8.2 ejecutar: npm cache clean --force
+    8.3 ejecutar: npm install --save nombre_dependencia@version
+    8.4 Si la dependencia no va a ser necesaria despues se puede instalar para desarrollador: npm install --save-dev nombre_dependencia@version
+
+
+Soluciones a problemas con Rxjs y Observable de Angular
+
+  1 si no tenemos el paquete rjxs-compat tenemos que
+    1.1 colocar todos los imports Observable de esta forma en todos los *.service.ts:
+
+      import { Observable } from 'rxjs';
+
+  2 ejecutar npm install --save  rjxs-compat
+    2.1 colocar todos los imports Observable de esta forma en todos los *.service.ts:
+
+      import { Observable } from 'rxjs/Observable';
+
+
+
+ejecuntando more nombre_del_archivo.extension te muestra el contenido del archivo
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                                      NOTAS DE BACKEND
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+para ejecutar un archivo en la consola de comandos se usa
+
+node nombre_del_archivo
+
+sin necesidad de colocar el .js
+
+"npm init" nos crea un proyecto en la carpeta que se elija y nos crea un package.json para instalar las dependencias del proyecto, tambien nos permite elegir la version, el autor y otros detalles
+
+"npm install nombre_del_paquete --save" este comando instala dicho paquete dentro de tu proyecto
+
+Express es un framework para trabajar con http y con rutas
+
+body-parser nos permite convertir las peticiones del backend a un objeto JSON por JavaScript
+
+connect-multiparty nos permite subir archivos al backend y poder trabajar con el protocolo file
+
+mongoose es una libreria que es un ORM para trabajar con mongoDB
+
+nodemon permite que en el servidor nodeJS cuando hagas un cambio en el codigo js automaticamente se refresque el servidor para no hacerlo manualmente
+
+"strat": "nodemon nombre_del_archivo.js" se coloca este codigo en la seccion de scripts de package.json para que cuando se utilice el comando
+
+npm start
+
+nodemon corra el script en el nombre_del_archivo que tendra toda la parte principal como la conexion al servidor
+
+
+el primer paso o el paso mas recomendable en el proyecto de ervidor seria crear los modelos de la base de datos o las entidades
+
+organizaremos la Arquitectura del proyecto usando el patron de diseño MVC
+
+es recomendable crear un fichero de rutas para cada ruta que se use en el proyecto
+
+para crear un middleware se usa nombre_variable.use(); donde nombre_variable es la que carga todo el modulo de express();
+
+configurar el acceso cors es fundamental cuando tenemos un frontend que esta constantemente haciendo peticiones al backend para tener la menor cantidad de problemas a la hora de hacer peticiones http
+
+si me aparece el error de EL COMMAND NODEMON NO SE RECONOCE EN LA TERMINAL PARA EL SERVER DEL NODO JS
+
+correr el comando npm install -g nodemon para instalarlo globalmente en el equipo
