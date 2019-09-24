@@ -14,6 +14,7 @@ import { ErrorComponent } from './components/error/error.component';
 import { EditComponent } from './components/edit/edit.component';
 import { SliderComponent } from './components/slider/slider.component';
 import { ResaltadoDirective } from './resaltado.directive';
+import { IndexComponent } from './components/index/index.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { ResaltadoDirective } from './resaltado.directive';
     DetailComponent,
     EditComponent,
     SliderComponent,
-    ResaltadoDirective
+    ResaltadoDirective,
+    IndexComponent
   ],
   imports: [
     BrowserModule,

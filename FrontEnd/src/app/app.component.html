@@ -1,11 +1,36 @@
 <header>
-  <ul>
-    <li><a [routerLink]="['/sobre-mi']" [routerLinkActive]="['actived']">Sobre Mi</a></li>
-    <li><a [routerLink]="['/proyectos']" [routerLinkActive]="['actived']">Proyectos</a></li>
-    <li id="logo"><a href="#">VR</a></li>
-    <li><a [routerLink]="['/crear-proyecto']" [routerLinkActive]="['actived']">Crear Proyecto</a></li>
-    <li><a [routerLink]="['/contacto']" [routerLinkActive]="['actived']">Contacto</a></li>
-  </ul>
+  <div class="coverCoverButton">
+    <div class="coverButtonTop"></div>
+      <a href="#" class="button violet" [routerLink]="['/inicio']" [routerLinkActive]="['actived']">
+        <span class="overbutton">Inicio</span>
+      </a>
+    <div class="coverButtonBottom"></div>
+    <div class="coverButtonTriangle"></div>
+  </div>
+  <div class="coverCoverButton">
+    <div class="coverButtonTop"></div>
+      <a href="#" class="button violet" [routerLink]="['/sobre-mi']" [routerLinkActive]="['actived']">
+        <span class="overbutton">Sobre Mi</span>
+      </a>
+    <div class="coverButtonBottom"></div>
+    <div class="coverButtonTriangle"></div>
+  </div>
+  <div class="coverCoverButton">
+    <div class="coverButtonTop"></div>
+      <a href="#" class="button violet" [routerLink]="['/proyectos']" [routerLinkActive]="['actived']">
+        <span class="overbutton">Proyectos</span>
+      </a>
+    <div class="coverButtonBottom"></div>
+    <div class="coverButtonTriangle"></div>
+  </div>
+  <div class="coverCoverButton">
+    <div class="coverButtonTop"></div>
+      <a href="#" class="button violet" [routerLink]="['/contacto']" [routerLinkActive]="['actived']">
+        <span class="overbutton">Contacto</span>
+      </a>
+    <div class="coverButtonBottom"></div>
+    <div class="coverButtonTriangle"></div>
+  </div>
 </header>
 
 <section id="content">

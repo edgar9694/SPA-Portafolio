@@ -32,70 +32,184 @@ body{
 /* Barra de navegacion / cabecera */
 
 header{
-  display: block;
-  width: 100%;
-  height: 90px;
+  display: grid;
+  width: 800px;
+  height: 120px;
   background: rgba(53, 103, 164, 0.8);
-  position: fixed;
   text-transform: uppercase;
+  grid-template-columns: 25% 25% 25% 25%;
+  position: absolute;
 }
 
-header ul{
+
+  /* hexagon button */
+.coverCoverButton{
+  position: relative;
+	display:block;
+	background: transparent;
+	width:200px;
+	height:80px;
+	line-height:70px;
+	text-align:center;
+	margin:0px auto;
+}
+
+.coverButtonTriangle{
+  position: absolute;
+  left: 29px;
+  top: 80px;
+  width: 117.6px;
+  height: 0;
+  border-left: 15px solid rgb(249, 210, 249);
+  border-right: 15px solid rgb(249, 210, 249);
+  border-top: 20px solid rgb(249, 210, 249);
+  -webkit-transform: perspective(15px) rotateX(-6.3deg);
+  -moz-transform: perspective(15px) rotateX(-6.3deg);
+  transform: perspective(15px) rotateX(-6.3deg);
+  clear: both;
+  animation: disableButtonTriangle 0.5s forwards;
+}
+
+.triangleActive{
+  animation: enableButtonTriangle 0.5s forwards;
+}
+
+.coverButtonTriangleActive{
+  border-left: 15px solid violet;
+  border-right: 15px solid violet;
+  border-top: 20px solid violet;
+}
+
+.coverButtonTop,
+.coverButtonBottom{
+  position: absolute;
   display:block;
-  width: 42%;
-  height: inherit;
-  margin:0px auto;
-  margin-top: -4px;
-}
-
-header ul li{
-  display: inline-block;
-  margin: 0px auto;
-  text-align: center;
-  line-height: 88px;
-}
-
-header a{
-  display: block;
-  padding-right: 20px;
-  padding-left: 20px;
-  height: inherit;
-  color: white;
-  transition: all 300ms;
-}
-
-header a:hover,.actived{
-  background: rgba(0,0,0,0.8);
-}
-
-
-/* logotipo */
-
-#logo{
-  font-family: "finger";
-  font-size: 30px;
-
-}
-
-#logo a{
-  transition: color 500ms, transform 500ms;
-}
-header #logo a:hover{
   background: transparent;
-  transform: scale(1.50,1.50);
+  left: 15px;
+  width:170px;
+  height:30px;
+  line-height:30px;
+  text-align:center;
+  border: 3px solid rgb(249, 210, 249);
+
 }
+
+.coverButtonTop{
+  top:0px;
+  border-bottom: none;
+  -webkit-transform: perspective(15px) rotateX(5deg);
+  -moz-transform: perspective(15px) rotateX(5deg);
+  transform: perspective(15px) rotateX(5deg);
+  animation: disableCoverTop 0.5s forwards;
+}
+
+.topActive{
+  animation: enableCoverTop 0.5s forwards;
+}
+
+.coverButtonBottom{
+  bottom: 0px;
+  border-top: none;
+  -webkit-transform: perspective(15px) rotateX(-5deg);
+  -moz-transform: perspective(15px) rotateX(-5deg);
+  transform: perspective(15px) rotateX(-5deg);
+  animation: disableCoverBottom 0.5s forwards;
+}
+
+.bottomActive{
+  animation: enableCoverBottom 0.5s forwards;
+}
+
+.coverButtonTopActive{
+  border: 3px solid violet;
+  border-bottom: none;
+}
+
+.coverButtonBottomActive{
+  border: 3px solid violet;
+  border-top: none;
+}
+
+  /* General Button Style */
+.button{
+  position: relative;
+  display: block;
+  background: transparent;
+  width: 150px;
+  height: 70px;
+  line-height: 70px;
+  font-size: 15px;
+  text-decoration: none;
+  text-transform: uppercase;
+  top: 5px;
+  left: 25px;
+}
+.button::before, .button::after {
+	width:145px;
+  left: 2px;
+	height:25px;
+  z-index: -1;
+  border: 3px solid violet;
+}
+
+.button::before{
+  position: absolute;
+  top: 0px;
+  content: '';
+  border-bottom: none;
+  -webkit-transform: perspective(15px) rotateX(5deg);
+  -moz-transform: perspective(15px) rotateX(5deg);
+  transform: perspective(15px) rotateX(5deg);
+}
+.button::after{
+  position: absolute;
+  bottom: 0px;
+  content: '';
+  border-top: none;
+  -webkit-transform: perspective(15px) rotateX(-5deg);
+  -moz-transform: perspective(15px) rotateX(-5deg);
+  transform: perspective(15px) rotateX(-5deg);
+}
+
+/* Button Hover Style */
+.button::before,
+.button::after {
+    animation: disableButton 0.5s forwards;
+}
+
+
+.button:hover::before,
+.button:hover::after {
+    animation: enableButton 0.5s forwards;
+}
+
+.button span{
+  border-radius: 5px;
+  padding: 5px 26px;
+  animation: enableButtonSpan 0.5s forwards;
+}
+
+
+.button:hover span{
+  padding: 5px 26px;
+  animation: disableButtonSpan 0.5s forwards;
+}
+/* Barra de navegacion / cabecera */
+
 
 /* Contenedor principal */
 
 #content{
-  min-height: 700px;
+  min-height: 800px;
   width: 75%;
   margin: 0px auto;
   box-shadow: 0px 0px 40px black;
   border-left: 1px solid #b7b7b7;
   border-right: 1px solid #b7b7b7;
   background: rgba(255,255,255,0);
-  padding-top: 120px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 2fr 0.5fr
 }
 
 /* Pie de pagina */
@@ -113,7 +227,7 @@ footer{
   width: 70%;
   margin: 0px auto;
   text-align: center;
-  margin-top: 20px;
+  /* margin-top: 20px; */
   margin-bottom: 70px;
 }
 
@@ -129,6 +243,12 @@ footer{
   color: gray;
   margin-top: 5px;
   margin-bottom: 5px;
+}
+
+.indexTitle{
+  grid-column-start: 1;
+  grid-column-end: 1;
+  grid-row: 1
 }
 
 article.about{
@@ -303,3 +423,247 @@ form input[disabled]{
   font-weight: bold;
   margin-top: 20px;
 }
+
+
+/*
+    ANIMACIONES
+ */
+
+
+
+ @keyframes enableButton{
+
+   0% {
+     background: violet;
+   }
+   30% {
+     background: transparent;
+   }
+   60% {
+     background: violet;
+   }
+   80% {
+     background: transparent;
+   }
+   100% {
+     background: violet;
+   }
+ }
+
+ @keyframes disableButton{
+
+   0% {
+     background: transparent;
+   }
+   20% {
+     background: violet;
+   }
+   40% {
+     background: transparent;
+   }
+   70% {
+     background: violet;
+   }
+   100% {
+     background: transparent;
+   }
+ }
+
+ @keyframes enableButtonSpan{
+
+   0% {
+     background: violet;
+     color: white
+   }
+   30% {
+     background: white;
+     color: violet;
+   }
+   60% {
+     background: violet;
+     color: white;
+   }
+   80% {
+     background: white;
+     color: violet;
+   }
+   100% {
+     background: violet;
+     color: white;
+   }
+ }
+
+ @keyframes disableButtonSpan{
+
+   0% {
+     background: white;
+     color: violet;
+   }
+   20% {
+     background: violet;
+     color: white;
+   }
+   40% {
+     background: white;
+     color: violet;
+   }
+   70% {
+     background: violet;
+     color: white;
+   }
+   100% {
+     background: white;
+     color: violet;
+   }
+ }
+ @keyframes enableCoverTop{
+   0% {
+     border: 3px solid violet;
+     border-bottom: none;
+
+   }
+   30% {
+     border: 3px solid transparent;
+     border-bottom: none;
+   }
+   60% {
+     border: 3px solid violet;
+     border-bottom: none;
+   }
+   80% {
+     border: 3px solid transparent;
+     border-bottom: none;
+   }
+   100% {
+     border: 3px solid violet;
+     border-bottom: none;
+   }
+ }
+
+ @keyframes disableCoverTop {
+   0%{
+     border: 3px solid transparent;
+     border-bottom: none;
+   }
+   20%{
+     border: 3px solid violet;
+     border-bottom: none;
+   }
+   40%{
+     border: 3px solid transparent;
+     border-bottom: none;
+   }
+   70%{
+     border: 3px solid violet;
+     border-bottom: none;
+   }
+   100%{
+     border: 3px solid rgb(249, 210, 249);
+     border-bottom: none;
+   }
+ }
+
+ @keyframes enableCoverBottom{
+   0% {
+     border: 3px solid violet;
+     border-top: none;
+   }
+   30% {
+     border: 3px solid transparent;
+     border-top: none;
+   }
+   60% {
+     border: 3px solid violet;
+     border-top: none;
+   }
+   80% {
+     border: 3px solid transparent;
+     border-top: none;
+   }
+   100% {
+     border: 3px solid violet;
+     border-top: none;
+   }
+ }
+
+ @keyframes disableCoverBottom {
+   0%{
+     border: 3px solid transparent;
+     border-top: none;
+   }
+   20%{
+     border: 3px solid violet;
+     border-top: none;
+   }
+   40%{
+     border: 3px solid transparent;
+     border-top: none;
+   }
+   70%{
+     border: 3px solid violet;
+     border-top: none;
+   }
+   100%{
+     border: 3px solid rgb(249, 210, 249);
+     border-top: none;
+   }
+ }
+
+ @keyframes enableButtonTriangle{
+   0% {
+     border-left: 15px solid violet;
+     border-right: 15px solid violet;
+     border-top: 20px solid violet;
+   }
+   30% {
+     border-left: 15px solid transparent;
+     border-right: 15px solid transparent;
+     border-top: 20px solid transparent;
+   }
+   60% {
+     border-left: 15px solid violet;
+     border-right: 15px solid violet;
+     border-top: 20px solid violet;
+   }
+   80% {
+     border-left: 15px solid transparent;
+     border-right: 15px solid transparent;
+     border-top: 20px solid transparent;
+   }
+   100% {
+     border-left: 15px solid violet;
+     border-right: 15px solid violet;
+     border-top: 20px solid violet;
+   }
+ }
+
+ @keyframes disableButtonTriangle{
+   0%{
+     border-left: 15px solid transparent;
+     border-right: 15px solid transparent;
+     border-top: 20px solid transparent;
+   }
+   20%{
+     border-left: 15px solid violet;
+     border-right: 15px solid violet;
+     border-top: 20px solid violet;
+   }
+   40%{
+     border-left: 15px solid transparent;
+     border-right: 15px solid transparent;
+     border-top: 20px solid transparent;
+   }
+   70%{
+     border-left: 15px solid violet;
+     border-right: 15px solid violet;
+     border-top: 20px solid violet;
+   }
+   100%{
+     border-left: 15px solid rgb(249, 210, 249);;
+     border-right: 15px solid rgb(249, 210, 249);;
+     border-top: 20px solid rgb(249, 210, 249);;
+   }
+ }
+ /*
+     ANIMACIONES
+  */
